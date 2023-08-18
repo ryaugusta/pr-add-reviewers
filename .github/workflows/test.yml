@@ -17,6 +17,6 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         owner: 'ryaugusta'
-        repo: 'pr-add-reviewers-composte-action'
+        repo: 'pr-add-reviewers'
         reviewers: 'ryanaugusta'
         # team_reviewers: ''
