@@ -11,7 +11,6 @@ const main = async () => {
         const team_reviewers = core.getInput('team_reviewers'); 
         const slug_reviewers = team_reviewers.split(',');
         const octokit = new github.getOctokit(token); 
-
         
         if (octokit.context.payload.pull_request == null) {
             core.setFailed("No pull request found.");
@@ -38,9 +37,9 @@ const main = async () => {
 
         else if(reviewers != '' && team_reviewers != '') {
             await github.rest.pulls.requestReviewers({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.payload.pull_request.number,
+                owner: owner,
+                repo: repo,
+                pull_number: octokit.context.payload.pull_request.number,
                 reviewers: user_reviewers,
                 team_reviewers: slug_reviewers
             });
