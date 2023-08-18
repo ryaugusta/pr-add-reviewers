@@ -7,15 +7,23 @@ const main = async () => {
         const owner = core.getInput('owner', {required: true}); 
         const repo = core.getInput('repo', {required: true}); 
         const reviewers = core.getInput('reviewers'); 
+        const user_reviwers = reviewers.split(',');
         const team_reviewers = core.getInput('team_reviewers'); 
+        const slug_reviewers = team_reviewers.split(',');
         const octokit = new github.getOctokit(token); 
+
+        
+        if (context.payload.pull_request == null) {
+            core.setFailed("No pull request found.");
+            return;
+        }
     
         if(reviewers != '') {
             await octokit.rest.pulls.requestReviewers({
                 owner: owner,
                 repo: repo,
                 pull_number: octokit.context.payload.pull_request.number,
-                reviewers: [reviewers]
+                reviewers: user_reviwers
             });
         }
         
@@ -24,7 +32,7 @@ const main = async () => {
                 owner: owner,
                 repo: repo,
                 pull_number: octokit.context.payload.pull_request.number,
-                teamReviewers: [team_reviewers]
+                team_reviewers: slug_reviewers
             });
         }
 
@@ -33,8 +41,8 @@ const main = async () => {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.payload.pull_request.number,
-                reviewers: [reviewers],
-                teamReviewers: [team_reviewers]
+                reviewers: user_reviwers,
+                team_reviewers: slug_reviewers
             });
         }
         else {
