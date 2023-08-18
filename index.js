@@ -13,7 +13,7 @@ const main = async () => {
         const octokit = new github.getOctokit(token); 
 
         
-        if (context.payload.pull_request == null) {
+        if (octokit.context.payload.pull_request == null) {
             core.setFailed("No pull request found.");
             return;
         }
