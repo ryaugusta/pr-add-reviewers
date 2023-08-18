@@ -9,6 +9,9 @@ on:
      - reopened
      - synchronize
 
+env:
+  reviewers: 'ryanaugusta'
+
 jobs:
   ex:
     runs-on: ubuntu-latest
@@ -19,5 +22,5 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         owner: 'ryaugusta'
         repo: 'pr-add-reviewers'
-        reviewers: 'ryanaugusta'
+        reviewers: ${{ env.reviewers }}
         # team_reviewers: ''
