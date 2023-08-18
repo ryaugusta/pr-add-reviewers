@@ -15,7 +15,7 @@ const main = async () => {
                 owner: owner,
                 repo: repo,
                 pull_number: octokit.context.payload.pull_request.number,
-                reviewers: reviewers
+                reviewers: [reviewers]
             });
         }
         
@@ -24,7 +24,7 @@ const main = async () => {
                 owner: owner,
                 repo: repo,
                 pull_number: octokit.context.payload.pull_request.number,
-                teamReviewers: team_reviewers
+                teamReviewers: [team_reviewers]
             });
         }
 
@@ -33,8 +33,8 @@ const main = async () => {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.payload.pull_request.number,
-                reviewers: reviewers,
-                teamReviewers: team_reviewers
+                reviewers: [reviewers],
+                teamReviewers: [team_reviewers]
             });
         }
         else {
