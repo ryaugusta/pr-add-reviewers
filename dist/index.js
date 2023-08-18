@@ -9819,8 +9819,8 @@ const main = async () => {
         const token = core.getInput('token', {required: true});
         const owner = core.getInput('owner', {required: true}); 
         const repo = core.getInput('repo', {required: true}); 
-        const reviewers = [core.getInput('reviewers')]; 
-        const team_reviewers = [core.getInput('team_reviewers')]; 
+        const reviewers = core.getInput('reviewers'); 
+        const team_reviewers = core.getInput('team_reviewers'); 
         const octokit = new github.getOctokit(token); 
     
         if(reviewers != '') {
@@ -9828,7 +9828,7 @@ const main = async () => {
                 owner: owner,
                 repo: repo,
                 pull_number: octokit.context.payload.pull_request.number,
-                reviewers: [reviewers]
+                reviewers: reviewers
             });
         }
         
@@ -9837,7 +9837,7 @@ const main = async () => {
                 owner: owner,
                 repo: repo,
                 pull_number: octokit.context.payload.pull_request.number,
-                teamReviewers: [team_reviewers]
+                teamReviewers: team_reviewers
             });
         }
 
@@ -9846,8 +9846,8 @@ const main = async () => {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.payload.pull_request.number,
-                reviewers: [reviewers],
-                teamReviewers: [team_reviewers]
+                reviewers: reviewers,
+                teamReviewers: team_reviewers
             });
         }
         else {
