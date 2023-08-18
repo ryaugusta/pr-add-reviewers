@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: ryaugusta/pr-add-reviewers@main
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ github.token }}
         owner: 'ryaugusta'
         repo: 'pr-add-reviewers'
         reviewers: ${{ env.reviewers }}
