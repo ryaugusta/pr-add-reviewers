@@ -1,0 +1,29 @@
+name: Add Reviewers to Pull Request
+description: 'Add a reviewer to a pull request using API'
+
+inputs:
+  reviewers:
+    description: "list of collaborators id's to be a reviewer"
+    required: false
+    default: ''
+  team_reviewers:
+    description: "list of team_slug collaboratos to be reviewers"
+    required: false
+    default: ''
+  owner: 
+    description: 'The owner of the repository'
+    required: true
+  repo:
+    description: 'The name of the repository'
+    required: true
+  token:
+    description: 'The token to use to access the GitHub API'
+    required: true
+
+runs:
+  using: 'node16'
+  main: 'index.js'
+
+branding:
+  icon: 'git-pull-request'
+  color: 'white'  
