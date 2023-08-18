@@ -7,7 +7,7 @@ const main = async () => {
         const owner = core.getInput('owner', {required: true}); 
         const repo = core.getInput('repo', {required: true}); 
         const reviewers = core.getInput('reviewers'); 
-        const user_reviwers = reviewers.split(',');
+        const user_reviewers = reviewers.split(',');
         const team_reviewers = core.getInput('team_reviewers'); 
         const slug_reviewers = team_reviewers.split(',');
         const octokit = new github.getOctokit(token); 
@@ -23,7 +23,7 @@ const main = async () => {
                 owner: owner,
                 repo: repo,
                 pull_number: octokit.context.payload.pull_request.number,
-                reviewers: user_reviwers
+                reviewers: user_reviewers
             });
         }
         
@@ -41,7 +41,7 @@ const main = async () => {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.payload.pull_request.number,
-                reviewers: user_reviwers,
+                reviewers: user_reviewers,
                 team_reviewers: slug_reviewers
             });
         }
