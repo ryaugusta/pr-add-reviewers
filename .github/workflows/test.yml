@@ -11,6 +11,7 @@ on:
 jobs:
   ex:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
     - uses: ryaugusta/pr-add-reviewers@main
       with:
