@@ -9832,7 +9832,7 @@ const run = async () => {
             return;
         }
     
-        if(reviewers != '') {
+        else if(reviewers != '') {
             await octokit.rest.pulls.requestReviewers({
                 owner: owner,
                 repo: repo,
@@ -9850,7 +9850,7 @@ const run = async () => {
             });
         }
 
-        else if(reviewers != '' && team_reviewers != '') {
+        else {
             await github.rest.pulls.requestReviewers({
                 owner: owner,
                 repo: repo,
@@ -9858,12 +9858,10 @@ const run = async () => {
                 reviewers: user_reviewers,
                 team_reviewers: slug_reviewers
             });
-        }
-        else {
-            console.log("No reviewers or team reviewers specified");
-        }
+        } 
     } catch (error) {
-        core.setFailed(error.message);
+        console.log("No reviewers or team reviewers specified");
+        core.setFailed(error.message)
     }
 }
 
