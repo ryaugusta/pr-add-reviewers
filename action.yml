@@ -10,12 +10,6 @@ inputs:
     description: "list of team_slug collaboratos to be reviewers"
     required: false
     default: ''
-  owner: 
-    description: 'The owner of the repository'
-    required: true
-  repo:
-    description: 'The name of the repository'
-    required: true
   token:
     description: 'The token to use to access the GitHub API'
     required: true
