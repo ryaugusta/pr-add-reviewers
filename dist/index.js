@@ -9830,10 +9830,12 @@ async function run() {
         owner: owner,
         repo: repo,
         pr_number: pr_number,
+        reviewers: user_reviewers,
+        team_reviewers: slug_reviewers
     };
 
     try {
-        
+
         if (context.payload.pull_request == null) {
             core.setFailed("No pull request found.");
             return;
@@ -9842,20 +9844,16 @@ async function run() {
         if(reviewers != '') {
             await octokit.rest.pulls.requestReviewers({
                 params,
-                reviewers: user_reviewers
             });
         } 
         else if(team_reviewers != '') {
             await octokit.rest.pulls.requestReviewers({
                 params,
-                team_reviewers: slug_reviewers
             });
         } 
         else {
             await octokit.rest.pulls.requestReviewers({
                 params,
-                reviewers: user_reviewers,
-                team_reviewers: slug_reviewers
             });
         } 
     } catch (error) {
