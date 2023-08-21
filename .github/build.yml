@@ -1,0 +1,19 @@
+name: Build
+
+on: 
+  workflow_dispatch:
+  # push:
+  #   branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: ncc
+        run: ncc build index.js -o dist
+      # TODO: add git push to commit dist/index.js
