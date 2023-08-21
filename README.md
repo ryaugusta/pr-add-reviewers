@@ -1,5 +1,5 @@
  # Add Reviewers to Pull Request
- [![CI](https://github.com/ryaugusta/pr-add-reviewers/workflows/CI/badge.svg)](https://github.com/ryaugusta/pr-add-reviewers/actions?query=workflow%3ACI)
+ [![Build](https://github.com/ryaugusta/pr-add-reviewers/workflows/Build/badge.svg)](https://github.com/ryaugusta/pr-add-reviewers/actions?query=workflow%3ACI)
 
 This action will add reviewers to a pull request. It will not add reviewers that are not collaborators on the repository.
 ### Inputs
