@@ -20,7 +20,6 @@ jobs:
         with:
           node-version: 16.x
       - run: npm ci
-      - run: ncc build index.js -o dist
       - uses: actions/upload-artifact@v3
         with:
           name: dist
