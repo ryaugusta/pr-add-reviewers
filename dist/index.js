@@ -9814,7 +9814,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(7334);
 const github = __nccwpck_require__(1908);
 
-const main = async () => {
+const run = async () => {
     try {
         const token = core.getInput('token', {required: true});
         const owner = core.getInput('owner', {required: true}); 
@@ -9824,9 +9824,8 @@ const main = async () => {
         const team_reviewers = core.getInput('team_reviewers'); 
         const slug_reviewers = team_reviewers.split(',');
         const octokit = new github.getOctokit(token); 
-
         
-        if (context.payload.pull_request == null) {
+        if (octokit.context.payload.pull_request == null) {
             core.setFailed("No pull request found.");
             return;
         }
@@ -9851,9 +9850,9 @@ const main = async () => {
 
         else if(reviewers != '' && team_reviewers != '') {
             await github.rest.pulls.requestReviewers({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.payload.pull_request.number,
+                owner: owner,
+                repo: repo,
+                pull_number: octokit.context.payload.pull_request.number,
                 reviewers: user_reviewers,
                 team_reviewers: slug_reviewers
             });
@@ -9866,7 +9865,7 @@ const main = async () => {
     }
 }
 
-main();
+run();
 
 })();
 

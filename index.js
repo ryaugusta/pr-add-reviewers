@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const main = async () => {
+const run = async () => {
     try {
         const token = core.getInput('token', {required: true});
         const owner = core.getInput('owner', {required: true}); 
@@ -52,4 +52,4 @@ const main = async () => {
     }
 }
 
-main();
+run();
