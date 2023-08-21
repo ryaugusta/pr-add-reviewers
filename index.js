@@ -3,6 +3,7 @@ const github = require('@actions/github');
 
 const main = async () => {
     try {
+        
         const token = core.getInput('token', {required: true});
         const owner = core.getInput('owner', {required: true}); 
         const repo = core.getInput('repo', {required: true}); 
