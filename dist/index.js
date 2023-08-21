@@ -9824,8 +9824,10 @@ const run = async () => {
         const team_reviewers = core.getInput('team_reviewers'); 
         const slug_reviewers = team_reviewers.split(',');
         const octokit = new github.getOctokit(token); 
+        const context = github.context;
+        const pr_number = context.payload.pull_request.number;
         
-        if (octokit.context.payload.pull_request == null) {
+        if (context.payload.pull_request == null) {
             core.setFailed("No pull request found.");
             return;
         }
@@ -9834,7 +9836,7 @@ const run = async () => {
             await octokit.rest.pulls.requestReviewers({
                 owner: owner,
                 repo: repo,
-                pull_number: octokit.context.payload.pull_request.number,
+                pull_number: pr_number,
                 reviewers: user_reviewers
             });
         }
@@ -9843,7 +9845,7 @@ const run = async () => {
             await octokit.rest.pulls.requestReviewers({
                 owner: owner,
                 repo: repo,
-                pull_number: octokit.context.payload.pull_request.number,
+                pull_number: pr_number,
                 team_reviewers: slug_reviewers
             });
         }
@@ -9852,7 +9854,7 @@ const run = async () => {
             await github.rest.pulls.requestReviewers({
                 owner: owner,
                 repo: repo,
-                pull_number: octokit.context.payload.pull_request.number,
+                pull_number: pr_number,
                 reviewers: user_reviewers,
                 team_reviewers: slug_reviewers
             });
