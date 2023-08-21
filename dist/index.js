@@ -9833,7 +9833,27 @@ async function run() {
         const repo = context.repo.repo;
         const pr_number = context.payload.pull_request.number;
 
-        if (reviewers || team_reviewers) {
+        if (reviewers) {
+            const params = {
+                owner: owner,
+                repo: repo,
+                pull_number: pr_number,
+                reviewers: user_reviewers,
+            }
+            await octokit.rest.pulls.requestReviewers(params);
+        }
+        
+        else if (team_reviewers) {
+            const params = {
+                owner: owner,
+                repo: repo,
+                pull_number: pr_number,
+                team_reviewers: slug_reviewers,
+            }
+            await octokit.rest.pulls.requestReviewers(params);
+        }
+
+        else if (reviewers && team_reviewers) {
             const params = {
                 owner: owner,
                 repo: repo,
@@ -9841,9 +9861,10 @@ async function run() {
                 reviewers: user_reviewers,
                 team_reviewers: slug_reviewers,
             };
-
             await octokit.rest.pulls.requestReviewers(params);
-        } else {
+        }
+
+        else {
             console.log("No reviewers or team reviewers specified");
         }
     } catch (error) {
